@@ -7,7 +7,7 @@ class HomeBloc extends Bloc<HomeEvents,HomeStates>{
   HomeBloc(): super(PageInitialState()){
     on<BottomNavClickEvent>((event, emit) {
 
-      if(event.selectedIndex==0 ||event.selectedIndex==1 ||event.selectedIndex==2 ){
+      if(event.selectedIndex<4){
         emit(PageChangeState(event.selectedIndex));
       }
 
