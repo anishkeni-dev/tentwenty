@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tentwenty/Bloc/HomePageBloc/HomeEvents.dart';
 
+import '../../Bloc/AppBar/AppBarBloc.dart';
+import '../../Bloc/AppBar/AppBarEvents.dart';
 import '../../Bloc/HomePageBloc/HomeBloc.dart';
 import '../../Theme/theme.dart';
 
@@ -20,6 +22,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
       _selectedIndex = index;
     });
     BlocProvider.of<HomeBloc>(context).add(BottomNavClickEvent(_selectedIndex));
+    BlocProvider.of<AppBarBloc>(context).add(AppBarSearchCloseEvent());
   }
 
   @override

@@ -11,7 +11,6 @@ class AppTheme{
   Color tertiaryTextColor = const Color.fromRGBO(143, 143, 143,1.0);
 
   Color shadowColor = const Color.fromRGBO(130, 125, 136,1.0);
-
-
+  Color scaffoldBackground =  Colors.black12;
 
 }

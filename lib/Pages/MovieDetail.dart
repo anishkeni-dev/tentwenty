@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_interpolation_to_compose_strings
+
 import 'dart:math';
 
 import 'package:flutter/material.dart';
@@ -63,9 +65,10 @@ class _MovieDetailState extends State<MovieDetail> {
               forceMaterialTransparency: true),
         ),
       ),
-      body: SingleChildScrollView(
-        child: FutureBuilder(
-          builder:(context, snapshot) => snapshot.hasData?  Column(children: [
+      body: FutureBuilder(
+        builder:(context, snapshot) => snapshot.hasData?
+        MediaQuery.of(context).size.aspectRatio < 1.0?SingleChildScrollView(
+          child: Column(children: [
             Stack(
               alignment: Alignment.center,
               children: [
@@ -115,7 +118,7 @@ class _MovieDetailState extends State<MovieDetail> {
               ],
             ),
             Padding(
-              padding: const EdgeInsets.only(top:20.0,left: 40),
+              padding: const EdgeInsets.only(top:20.0,left: 40,bottom: 20),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -156,8 +159,97 @@ class _MovieDetailState extends State<MovieDetail> {
                 ],
               ),
             )
-          ]):const Center(child: CircularProgressIndicator()), future:futureMovieData ,
-        ),
+          ]),
+        ):Row(children: [
+          Stack(
+            alignment: Alignment.center,
+            children: [
+              Container(
+                  height: MediaQuery.of(context).size.height,
+                  width:  MediaQuery.of(context).size.width*0.5,
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                        image: NetworkImage(
+                            'https://image.tmdb.org/t/p/original' + snapshot.data!.posterPath),
+                        fit: BoxFit.cover),
+                  ),
+                  foregroundDecoration: const BoxDecoration(
+                    gradient: LinearGradient(
+                      colors: [Colors.black, Colors.transparent, Colors.transparent, Colors.black],
+                      begin: Alignment.topCenter,
+                      end: Alignment.bottomCenter,
+                      stops: [0, 0.2, 0.3, 1],
+                    ),
+                  ),
+                  child: const SizedBox()),
+              Container(
+                margin: const EdgeInsets.only(top: 120),
+                alignment: Alignment.bottomCenter,
+                height: MediaQuery.of(context).size.height * 0.5,
+                child: Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(10.0),
+                      child: Text(
+                        "in Theatres "+ formattedDate,
+                        style: TextStyle(
+                          fontSize: 20,
+                          overflow: TextOverflow.ellipsis,
+                          fontWeight: FontWeight.w800,
+                          color: AppTheme().primaryTextColor,
+                        ),
+                      ),
+                    ),
+                     Container(margin: const EdgeInsets.all(10.0),width:250,height:50,child: const PrimaryElevatedButton(buttonText: "Get Tickets")),
+                     Container(margin: const EdgeInsets.all(10.0),width:250,height:50, child:SecondaryElevatedButton(buttonText: "Watch Trailer"))
+                  ],
+                ),
+              ),
+            ],
+          ),
+          SingleChildScrollView(
+            child: Padding(
+              padding: const EdgeInsets.only(top:20.0,left: 40,bottom: 20),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text("Genres",
+                      style:
+                      TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                  Container(
+                      child: Row(
+                        children: [
+                          SizedBox(
+                              width: MediaQuery.of(context).size.width*0.45,
+                              height: MediaQuery.of(context).size.height * 0.2,
+                              child: ListView.builder(
+                                shrinkWrap: true,
+                                scrollDirection: Axis.horizontal,
+                                itemBuilder: (context, index) =>
+                                    Padding(
+                                      padding: const EdgeInsets.only(right: 10.0),
+                                      child: Chip(color: materialColor ,label: Text(snapshot.data!.genres[index].name,style: const TextStyle(color: Colors.white),)),
+                                    ),
+                                itemCount: snapshot.data!.genres.length,
+                              ))
+                        ],
+                      )),
+                  Container(
+                   width: MediaQuery.of(context).size.width *0.2,
+                    child: const Text("Overview",
+                        style:
+                        TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
+                  ),
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width *0.3,
+                    child: Text(
+                      snapshot.data!.overview,style: TextStyle(color: AppTheme().tertiaryTextColor),),
+                  )
+                ],
+              ),
+            ),
+          )
+        ]):const Center(child: CircularProgressIndicator()), future:futureMovieData ,
       ),
     );
   }

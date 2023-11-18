@@ -6,7 +6,12 @@ import 'package:tentwenty/Pages/WatchPage.dart';
 import 'package:tentwenty/Service/api.dart';
 import 'package:tentwenty/Service/repository.dart';
 import 'package:tentwenty/Widgets/Common/bottomNavBar.dart';
+import 'package:tentwenty/Widgets/GenreList.dart';
+import 'package:tentwenty/Widgets/SearchResults.dart';
 import 'package:tentwenty/Widgets/TopAppBar.dart';
+
+import '../Bloc/AppBar/AppBarBloc.dart';
+import '../Bloc/AppBar/AppBarStates.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -30,28 +35,34 @@ class _HomePageState extends State<HomePage> {
   ];
   Repository repo = Repository();
   @override
-
-
   @override
   Widget build(BuildContext context) {
-    return Builder(
-      builder:(context) =>  BlocBuilder<HomeBloc, HomeStates>(builder: (context, state) {
-        return Scaffold(
-          resizeToAvoidBottomInset: false,
-          backgroundColor: const Color.fromRGBO(246, 246, 250,1),
-          appBar: PreferredSize(preferredSize: const Size.fromHeight(60),child: TopAppBar(index: state is PageChangeState?state.index:0,)),
-          body: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                state is PageInitialState
-                    ? Center(child: _widgetOptions.elementAt(0))
-                    : state is PageChangeState
-                        ?  Center(child:_widgetOptions.elementAt(state.index))
-                        : const CircularProgressIndicator()
-              ]),
-          bottomNavigationBar: const BottomNavBar(),
-        );
+    return Scaffold(
+      resizeToAvoidBottomInset: false,
+      backgroundColor: const Color.fromRGBO(246, 246, 250, 1),
+      appBar: PreferredSize(
+          preferredSize: const Size.fromHeight(60),
+          child: BlocBuilder<HomeBloc, HomeStates>(builder: (context, state) {
+            return TopAppBar(
+              index: state is PageChangeState ? state.index : 0,
+            );
+          })),
+      body: BlocBuilder<AppBarBloc, AppBarStates>(builder: (context, state) {
+        return state is AppBarSearchActiveState ? const GenreList():
+                state is SearchingForResultsState ||
+                state is SearchResultsLoadedState
+            ? const SearchResults()
+            : Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
+                BlocBuilder<HomeBloc, HomeStates>(builder: (context, state) {
+                  return state is PageInitialState
+                      ? Center(child: _widgetOptions.elementAt(0))
+                      : state is PageChangeState
+                          ? Center(child: _widgetOptions.elementAt(state.index))
+                          : const CircularProgressIndicator();
+                }),
+              ]);
       }),
+      bottomNavigationBar: const BottomNavBar(),
     );
   }
 }

@@ -49,7 +49,7 @@ class _WatchPageState extends State<WatchPage> {
                 }),
           );
         } else {
-          return const CircularProgressIndicator();
+          return  Container( transform: Matrix4.translationValues(0, 350, 0), child: CircularProgressIndicator());
         }
       },
     );

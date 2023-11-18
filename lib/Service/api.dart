@@ -3,14 +3,14 @@ import 'dart:convert';
 
 import '../Model/MovieList.dart';
 
- fetchData(String endPoint) async {
+ fetchData(String endPoint,String searchQuery) async {
   const String apiKey = '38c8e4e13865d22d2fb57bc0ce01dcf1';
   const String apiBaseUrl = 'https://api.themoviedb.org/3';
 
   // Create query parameters
   Map<String, String> queryParams = {
     'api_key': apiKey,
-
+    'query':searchQuery,
     // Add any additional parameters you want here
   };
 
