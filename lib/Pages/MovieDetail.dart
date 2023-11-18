@@ -7,8 +7,10 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:tentwenty/Pages/SeatSelect.dart';
 import 'package:tentwenty/Pages/ShowTime.dart';
+import 'package:tentwenty/Pages/VideoPlayer.dart';
 import 'package:tentwenty/Service/repository.dart';
 import 'package:tentwenty/Widgets/Common/buttons.dart';
+import 'package:video_player/video_player.dart';
 
 import '../Theme/theme.dart';
 
@@ -34,6 +36,7 @@ class _MovieDetailState extends State<MovieDetail> {
       futureMovieData = Future.value(data);
     });
     convertReleaseDate(data.releaseDate);
+    return data;
   }
 
   convertReleaseDate(date) {
@@ -46,13 +49,16 @@ class _MovieDetailState extends State<MovieDetail> {
 
   MaterialStateProperty<Color?>? materialColor = MaterialStateColor.resolveWith(
       (states) => Colors.primaries[Random().nextInt(Colors.primaries.length)]);
-
+  // late VideoPlayerController _videoPlayerController;
   @override
   void initState() {
     fetchDetails();
-
     super.initState();
+
+
   }
+  @override
+
 
   @override
   Widget build(BuildContext context) {
@@ -146,6 +152,10 @@ class _MovieDetailState extends State<MovieDetail> {
                                     width: 250,
                                     height: 50,
                                     child: SecondaryElevatedButton(
+                                        onPress: ()async{
+                                         var videoUrl = await repo.getMovieTeaser(snapshot.data.id);
+                                          Get.to(VideoWidget(id: videoUrl));
+                                        },
                                         buttonText: "Watch Trailer"))
                               ],
                             ),
@@ -269,7 +279,7 @@ class _MovieDetailState extends State<MovieDetail> {
                                   child: PrimaryElevatedButton(
                                     buttonText: "Get Tickets",
                                     onPress: () {
-                                      Get.to(SeatSelect());
+                                      Get.to(Showtime());
                                     },
                                   )),
                               Container(
@@ -277,6 +287,11 @@ class _MovieDetailState extends State<MovieDetail> {
                                   width: 250,
                                   height: 50,
                                   child: SecondaryElevatedButton(
+                                      onPress: ()async{
+                                        var videoUrl = await repo.getMovieTeaser(snapshot.data.id);
+                                        Get.to(VideoWidget(id: videoUrl));
+
+                                      },
                                       buttonText: "Watch Trailer"))
                             ],
                           ),

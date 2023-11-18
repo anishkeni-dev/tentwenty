@@ -34,7 +34,8 @@ class _PrimaryElevatedButtonState extends State<PrimaryElevatedButton> {
 
 class SecondaryElevatedButton extends StatefulWidget {
   final buttonText;
-  const SecondaryElevatedButton({super.key, required this.buttonText});
+  final onPress;
+  const SecondaryElevatedButton({super.key, required this.buttonText,required this.onPress});
 
   @override
   State<SecondaryElevatedButton> createState() =>
@@ -54,7 +55,7 @@ class _SecondaryElevatedButtonState extends State<SecondaryElevatedButton> {
   Widget build(BuildContext context) {
     return ElevatedButton(
       style: style,
-      onPressed: () {},
+      onPressed: widget.onPress,
       child: Text(
         widget.buttonText,
         style: TextStyle(color: Colors.white),

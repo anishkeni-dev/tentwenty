@@ -58,4 +58,15 @@ class Repository{
 
     return movieList;
   }
+
+  getMovieTeaser(id)async{
+    String endPoint = "/movie/$id/videos";
+    var jsonData = await fetchData(endPoint,'');
+    var data =jsonDecode(jsonData);
+    var key = data['results'][0]['key'];
+
+    final video = "https://www.youtube.com/watch?v=${key}";
+
+    return key;
+  }
 }
