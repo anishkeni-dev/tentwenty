@@ -8,10 +8,9 @@ class AppTheme{
 
   Color primaryTextColor = Colors.white;
   Color secondaryTextColor = Colors.black;
-  Color tertiaryTextColor = const Color.fromRGBO(219, 219, 223,1.0);
+  Color tertiaryTextColor = const Color.fromRGBO(143, 143, 143,1.0);
 
   Color shadowColor = const Color.fromRGBO(130, 125, 136,1.0);
-
-
+  Color scaffoldBackground = const Color.fromRGBO(246, 246, 250,0.96);
 
 }
