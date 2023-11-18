@@ -11,6 +11,10 @@ class PrimaryElevatedButton extends StatefulWidget {
 
 class _PrimaryElevatedButtonState extends State<PrimaryElevatedButton> {
   final ButtonStyle style = ElevatedButton.styleFrom(
+      shape: RoundedRectangleBorder(
+        side: BorderSide(color: AppTheme().secondaryColor,width: 1,style: BorderStyle.solid),
+        borderRadius: BorderRadius.circular(10.0),
+      ),
       textStyle: const TextStyle(fontSize: 20),
       backgroundColor: AppTheme().secondaryColor,
       foregroundColor: Colors.white);

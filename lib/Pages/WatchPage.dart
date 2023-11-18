@@ -35,8 +35,8 @@ class _WatchPageState extends State<WatchPage> {
         if (snapshot.hasData) {
           return SizedBox(
             height: MediaQuery.of(context).size.aspectRatio < 1.0
-                ? MediaQuery.of(context).size.height * 0.85
-                : MediaQuery.of(context).size.height * 0.65,
+                ? MediaQuery.of(context).size.height * 0.84
+                : MediaQuery.of(context).size.height * 0.63,
             child: ListView.builder(
                 shrinkWrap: true,
                 padding: EdgeInsets.all(10),

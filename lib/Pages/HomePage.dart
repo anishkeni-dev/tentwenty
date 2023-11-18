@@ -39,7 +39,7 @@ class _HomePageState extends State<HomePage> {
         return Scaffold(
           resizeToAvoidBottomInset: false,
           backgroundColor: const Color.fromRGBO(246, 246, 250,1),
-          appBar: PreferredSize(preferredSize: const Size.fromHeight(50),child: TopAppBar(index: state is PageChangeState?state.index:0,)),
+          appBar: PreferredSize(preferredSize: const Size.fromHeight(60),child: TopAppBar(index: state is PageChangeState?state.index:0,)),
           body: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
