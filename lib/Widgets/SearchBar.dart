@@ -18,7 +18,7 @@ class MovieSearchBar extends StatelessWidget {
             return Container(
               margin: EdgeInsets.only(top: 20,left: 10,right: 10),
               child: SearchBar(
-                backgroundColor: MaterialStateProperty.resolveWith((states) => AppTheme().scaffoldBackground),
+                backgroundColor: MaterialStateProperty.resolveWith((states) =>Colors.black12),
                 elevation: MaterialStateProperty.resolveWith((states) => 0),
                 controller: controller,
                 padding: const MaterialStatePropertyAll<EdgeInsets>(

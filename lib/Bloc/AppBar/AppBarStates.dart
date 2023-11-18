@@ -8,6 +8,7 @@ class SearchingForResultsState extends AppBarStates{
 
 }
 class AppBarSearchInActiveState extends AppBarStates{}
+
 class SearchResultsLoadedState extends AppBarStates{
   List searchData = [];
   SearchResultsLoadedState(this.searchData);

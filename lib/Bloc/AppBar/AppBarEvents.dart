@@ -8,3 +8,4 @@ class StartSearchEvent extends AppBarEvents{
    StartSearchEvent(this.searchInput);
 }
 class AppBarSearchCloseEvent extends AppBarEvents{}
+

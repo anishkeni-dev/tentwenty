@@ -18,8 +18,8 @@ class SearchResults extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
-                  margin: EdgeInsets.only(top: 20, left: 20),
-                  child: Text("Top results")),
+                  margin: const EdgeInsets.only(top: 20, left: 20),
+                  child: const Text("Top results")),
               const Divider(),
               SizedBox(
                 height: MediaQuery.of(context).size.aspectRatio < 1.0
@@ -48,7 +48,7 @@ class SearchResults extends StatelessWidget {
                                 fit: BoxFit.cover,
                               )),
                           Container(
-                              margin: EdgeInsets.only(left: 10),
+                              margin: const EdgeInsets.only(left: 10),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [

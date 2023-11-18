@@ -14,14 +14,14 @@ class TopAppBar extends StatelessWidget {
       builder:(context, state) => state is AppBarInitialState || state is AppBarSearchInActiveState? AppBar(
         title: Padding(
           padding: const EdgeInsets.all(10.0),
-          child: Text(index==0?"Dashboard":index==1?"Watch":index==2?"Media Library":"More", style: TextStyle(fontSize: 20, fontWeight: FontWeight.w400),),
+          child: Text(index==0?"Dashboard":index==1?"Watch":index==2?"Media Library":"More", style: const TextStyle(fontSize: 20, fontWeight: FontWeight.w400),),
         ),
         actions: [
           Padding(
             padding: const EdgeInsets.only(right: 10),
             child: IconButton(onPressed: (){
               BlocProvider.of<AppBarBloc>(context).add(SearchButtonClickEvent());
-            }, icon: Icon(Icons.search)),
+            }, icon: const Icon(Icons.search)),
           )
         ],
         elevation: 1,shadowColor: Colors.black,

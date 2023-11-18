@@ -3,7 +3,8 @@ import 'package:tentwenty/Theme/theme.dart';
 
 class PrimaryElevatedButton extends StatefulWidget {
   final buttonText;
-  const PrimaryElevatedButton({super.key, required this.buttonText});
+  final onPress;
+  const PrimaryElevatedButton({super.key, required this.buttonText,required this.onPress});
 
   @override
   State<PrimaryElevatedButton> createState() => _PrimaryElevatedButtonState();
@@ -22,7 +23,7 @@ class _PrimaryElevatedButtonState extends State<PrimaryElevatedButton> {
   Widget build(BuildContext context) {
     return ElevatedButton(
       style: style,
-      onPressed: () {},
+      onPressed: widget.onPress,
       child: Text(
         widget.buttonText,
         style: TextStyle(color: Colors.white),
